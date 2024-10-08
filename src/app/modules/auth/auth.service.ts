@@ -146,9 +146,10 @@ const refreshToken = async (token: string) => {
 const forgetPassword = async (email: string) => {
   const isExistUser = await User.isUserExistsByEmail(email);
 
+
   if (!isExistUser) {
     throw new AppError(httpStatus.NOT_FOUND, 'User not found');
-  }
+  } 
 
   if (await User.isUserDeleted(email)) {
     throw new AppError(httpStatus.FORBIDDEN, 'User Already Deleted');
