@@ -8,8 +8,8 @@ export const initiatePayment = async (paymentData: TPaymentInfo) => {
   const res = await axios.post(config.payment_url!, {
     store_id: config.store_id,
     tran_id: paymentData.transactionId,
-    success_url: `http://localhost:5000/api/v1/payments/confirmation?transactionId=${paymentData.transactionId}&status=success&email=${paymentData.customerEmail}`,
-    fail_url: `http://localhost:5000/api/payments/confirmation?status=failed`,
+    success_url: `https://server-pet-stories.vercel.app/api/v1/payments/confirmation?transactionId=${paymentData.transactionId}&status=success&email=${paymentData.customerEmail}`,
+    fail_url: `https://server-pet-stories.vercel.app/api/payments/confirmation?status=failed`,
     cancel_url: config.client_url,
     amount: paymentData.amount,
     currency: 'BDT',

@@ -16,7 +16,7 @@ app.use(cookieParser());
 // app.use(cors({origin: 'http://localhost:3000',credentials:true}));
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5000'], // Add more origins as needed
+  origin: ['http://localhost:3000','https://client-pet-care.vercel.app','https://server-pet-stories.vercel.app', 'http://localhost:5000'], // Add more origins as needed
   credentials: true,
 }));
 
