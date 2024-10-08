@@ -167,36 +167,77 @@ const getAllUsersFromDB = async (query: Record<string, unknown>) => {
   };
 };
 
-// get profile user
-const updateUserIntoDB = async (
-  payload: Partial<TUser>,file:any,
-  loggedUser: JwtPayload,
-) => {
-  // check user exist
-  const user = await User.isUserExistsByEmail(loggedUser?.email);
+// // get profile user
+// const updateUserIntoDB = async (
+//   payload: Partial<TUser>,file:any,
+//   loggedUser: JwtPayload,
+// ) => {
+//   // check user exist
+//   const user = await User.isUserExistsByEmail(loggedUser?.email);
+// console.log(user.email,"user");
 
-  if (!user) {
-    throw new AppError(httpStatus.NOT_FOUND, 'User not found');
+//   if (!user) {
+//     throw new AppError(httpStatus.NOT_FOUND, 'User not found');
+//   }
+//   if (file) {
+//     const imageName = `profile_${Math.random().toString().split('.')[1]}`;
+//     const path = file?.path;
+
+//     //send image to cloudinary
+//     const { secure_url } = await imageToCloudinary(imageName, path);
+//     payload.profilePicture = secure_url as string;
+// }
+
+//   // Add profile image URL to payload if it exists
+ 
+// console.log(payload,"payload");
+
+//   const result = await User.findOneAndUpdate(
+//     { email: user?.email },
+//     {
+//       $set: payload,
+//     },
+//     { new: true, runValidators: true },
+//   );
+// console.log(result,"ressssssssssssult");
+
+//   return result;
+// };
+const updateUserIntoDB = async (
+  payload: Partial<TUser>, 
+  file: any, 
+  loggedUser: JwtPayload
+) => {
+  // Check if the user exists in the database
+  const user = await User.isUserExistsByEmail(loggedUser?.email);
+  
+
+  // If user doesn't exist, throw an error
+  if (!user || !user.email) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found or email is missing');
   }
+
+  // If a file is uploaded, handle the file upload
   if (file) {
     const imageName = `profile_${Math.random().toString().split('.')[1]}`;
     const path = file?.path;
 
-    //send image to cloudinary
+    // Upload the image to Cloudinary and set the profile picture URL in the payload
     const { secure_url } = await imageToCloudinary(imageName, path);
     payload.profilePicture = secure_url as string;
-}
+  }
 
-  // Add profile image URL to payload if it exists
- 
+  console.log(payload, "Payload before update"); // Log payload to confirm correct data
 
+  // Perform the update operation
   const result = await User.findOneAndUpdate(
-    { email: loggedUser?.email },
+    { email: user?.email }, // Make sure this email matches the intended user
     {
-      $set: payload,
+      $set: payload, // Set the new data
     },
-    { new: true },
+    { new: true, runValidators: true } // Return the updated document and run schema validators
   );
+
 
   return result;
 };

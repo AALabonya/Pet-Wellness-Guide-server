@@ -59,7 +59,7 @@ router.put(
     (req: Request, res: Response, next: NextFunction) => {
       // console.log(req.body.data);
       
-        req.body = req.body.data;
+        req.body =JSON.parse(req.body.data);
         next();
     },
   auth('admin', 'user'),

@@ -8,16 +8,16 @@ export const sendEmail = async (resetUILink: string, email: string) => {
     port: 587,
     secure: config.node_env === 'production',
     auth: {
-      user: 'souravofficial.web@gmail.com',
-      pass: 'wyfa lfdx umow ggze',
+      user: 'ikraamoni@gmail.com',
+      pass: 'vnmk pitr cvak rjxw',
     },
   });
 
   // send mail
   await transporter.sendMail({
-    from: 'souravofficial.web@gmail.com',
+    from: 'ikraamoni@gmail.com',
     to: `${email}`,
-    subject: 'Reset you password within 1 hour',
+    subject: 'Reset you password within 2 hour',
     text: '',
     html: resetUILink,
   });

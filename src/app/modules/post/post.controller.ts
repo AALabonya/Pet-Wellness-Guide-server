@@ -49,7 +49,7 @@ const getSinglePost = catchAsync(async (req, res) => {
 });
 
 const updatePost = catchAsync(async (req, res) => {
-  const result = await PostServices.updatePostIntoDB(req.body, req.params.id);
+  const result = await PostServices.updatePostIntoDB(req.body, req.params.id,req.files as any[]);
 
   sendResponse(res, {
     statusCode: 200,
