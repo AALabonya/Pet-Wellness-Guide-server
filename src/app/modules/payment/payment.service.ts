@@ -45,7 +45,7 @@ const confirmationService = async (
             text-align: center;
           }
           .success {
-            color: #4CAF50;
+            color: #148d8c;
           }
           .cancel {
             color: #f44336;
@@ -59,7 +59,7 @@ const confirmationService = async (
             color: #fff;
           }
           .success-link {
-            background-color: #4CAF50;
+            background-color: #148d8c;
           }
           .cancel-link {
             background-color: #f44336;
@@ -72,7 +72,7 @@ const confirmationService = async (
             Payment ${status === 'success' ? 'Successful' : 'Canceled'}
           </h1>
           <a href="${config.client_url}" class="redirect-link ${status === 'success' ? 'success-link' : 'cancel-link'}">
-            ${status === 'success' ? 'Go to Dashboard' : 'Retry Payment'}
+            ${status === 'success' ? 'Go to Home' : 'Try Again Payment'}
           </a>
         </div>
       </body>
