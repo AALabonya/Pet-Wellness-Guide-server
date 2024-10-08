@@ -8,7 +8,7 @@ import config from './app/config';
 import path from 'path';
 
 const app: Application = express();
-app.use(express.static(path.join(__dirname, 'public')));
+
 // parsers
 app.use(express.json());
 app.use(cookieParser());
@@ -26,15 +26,6 @@ app.use('/api/v1', router);
 // global error handle zod, mongoose, custom error, error, cast error etc..
 app.use(globalErrorHandler);
 
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    message: 'Pet care Server Running...',
-  });
-});
-
-app.get('/confirmation', (req, res) => {
-  res.sendFile(__dirname + '/public/confirmation.html');
-});
 
 // not found route
 app.use(notFoundRoute);
