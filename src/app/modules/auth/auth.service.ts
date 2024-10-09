@@ -13,6 +13,7 @@ import { imageToCloudinary } from '../../utils/imageToCloudinary';
 // sign up user
 
 const signupUser = async (file: any, payload: TUser) => {
+
   // Check if user already exists by email
   if (await User.isUserExistsByEmail(payload.email)) {
     throw new AppError(
@@ -23,12 +24,13 @@ const signupUser = async (file: any, payload: TUser) => {
 
   
   if (file) {
-    const imageName = `profile_${Math.random().toString().split('.')[1]}`;
+    // const imageName = `profile_${Math.random().toString().split('.')[1]}`;
+
     const path = file?.path;
 
     //send image to cloudinary
-    const { secure_url } = await imageToCloudinary(imageName, path);
-    payload.profilePicture = secure_url as string;
+    // const { secure_url } = await imageToCloudinary(imageName, path);
+    payload.profilePicture = path as string;
 }
 
   // Add profile image URL to payload if it exists
@@ -36,6 +38,7 @@ const signupUser = async (file: any, payload: TUser) => {
 
   // Create the user
   const result = await User.create(payload);
+// console.log(result);
 
   return result;
 };

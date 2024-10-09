@@ -4,13 +4,14 @@ import { PostController } from './post.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import { PostValidation } from './post.validation';
 import { upload } from '../../utils/imageToCloudinary';
+import { multerUpload } from '../../config/multer.config';
 
 const router = Router();
 
 router.post(
-  '/',  upload.array('images', 10),
+  '/',  multerUpload.array('images', 10),
   (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body);
+    // console.log(req.body);
     
     if (req.body.data) {
       req.body = JSON.parse(req.body.data);
@@ -29,7 +30,7 @@ router.get('/', PostController.getPosts);
 router.get('/:id', PostController.getSinglePost);
 
 router.put(
-  '/:id', upload.array('images', 10),
+  '/:id', multerUpload.array('images', 10),
   (req: Request, res: Response, next: NextFunction) => {
     // console.log(req.body.data);
     

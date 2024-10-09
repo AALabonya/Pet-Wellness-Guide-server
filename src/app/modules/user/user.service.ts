@@ -219,12 +219,12 @@ const updateUserIntoDB = async (
 
   // If a file is uploaded, handle the file upload
   if (file) {
-    const imageName = `profile_${Math.random().toString().split('.')[1]}`;
+    // const imageName = `profile_${Math.random().toString().split('.')[1]}`;
     const path = file?.path;
 
     // Upload the image to Cloudinary and set the profile picture URL in the payload
-    const { secure_url } = await imageToCloudinary(imageName, path);
-    payload.profilePicture = secure_url as string;
+    // const { secure_url } = await imageToCloudinary(imageName, path);
+    payload.profilePicture = path as string;
   }
 
   console.log(payload, "Payload before update"); // Log payload to confirm correct data

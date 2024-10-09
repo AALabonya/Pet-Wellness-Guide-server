@@ -3,25 +3,24 @@ import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
 import { TPost } from './post.interface';
 import { Post } from './post.modal';
-import { imageToCloudinary } from '../../utils/imageToCloudinary';
 import { JwtPayload } from 'jsonwebtoken';
 import { Comment } from '../comment/comment.model';
 
 
 const createPostIntoDB = async (files: any[], user: any,payload: TPost) => {
-  console.log(payload ,"pppppppppppppppppppppppp");
+  // console.log(payload ,"pppppppppppppppppppppppp");
   
   const imageUrls: string[] = [];
   
   if (files && files.length > 0) {
     for (const file of files) {
-      const imageName = `images_${Math.random().toString().split('.')[1]}`;
+      // const imageName = `images_${Math.random().toString().split('.')[1]}`;
       const path = file.path;
 
-      const { secure_url } = await imageToCloudinary(imageName, path);
+      // const { secure_url } = await imageToCloudinary(imageName, path);
 
       
-      imageUrls.push(secure_url as string);
+      imageUrls.push(path as string);
     }
   }
 
@@ -30,7 +29,7 @@ const createPostIntoDB = async (files: any[], user: any,payload: TPost) => {
 
   const post = await Post.create(payload);
   // Create the post in the database
-console.log(post);
+// console.log(post);
 
   return post; // Return the created post
 };
@@ -88,16 +87,17 @@ const getSinglePostFromDB = async (id: string) => {
 
 const updatePostIntoDB = async (payload: Partial<TPost>, id: string,files: any[]) => {
   const imageUrls: string[] = [];
+  // console.log(files,"file");
   
   if (files && files.length > 0) {
     for (const file of files) {
-      const imageName = `images_${Math.random().toString().split('.')[1]}`;
+      // const imageName = `images_${Math.random().toString().split('.')[1]}`;
       const path = file.path;
 
-      const { secure_url } = await imageToCloudinary(imageName, path);
+      // const { secure_url } = await imageToCloudinary(imageName, path);
 
       
-      imageUrls.push(secure_url as string);
+      imageUrls.push(path as string);
     }
   }
 

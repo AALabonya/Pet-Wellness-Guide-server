@@ -5,14 +5,13 @@ import { UserValidation } from '../user/user.validation';
 import { AuthController } from './auth.controller';
 import auth from '../../middlewares/auth';
 import { upload } from '../../utils/imageToCloudinary';
+import { multerUpload } from '../../config/multer.config';
 
 const router = Router();
 
-// assign auth routes
-// signup user
 router.post(
   '/signup',
-  upload.single('profilePicture'),
+  multerUpload.single('profilePicture'),
     (req: Request, res: Response, next: NextFunction) => {
       // console.log(req.body.data);
       

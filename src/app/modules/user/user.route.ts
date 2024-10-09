@@ -44,6 +44,7 @@ import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
 import { UserValidation } from './user.validation';
 import { upload } from '../../utils/imageToCloudinary';
+import { multerUpload } from '../../config/multer.config';
 
 const router = Router();
 
@@ -55,7 +56,7 @@ router.get('/all', UserController.getAllUsers);
 
 // update profile for user
 router.put(
-  '/me',upload.single('profilePicture'),
+  '/me',multerUpload.single('profilePicture'),
     (req: Request, res: Response, next: NextFunction) => {
       // console.log(req.body.data);
       
